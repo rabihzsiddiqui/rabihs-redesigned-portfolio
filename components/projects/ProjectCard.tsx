@@ -1,12 +1,15 @@
 "use client";
 
 // components/projects/ProjectCard.tsx
-// Mode-selection card: 160px rest → 260px hover (desktop only).
+// Expandable project card for the TOOLS section.
 //
-// Mobile (<768px): fixed width (~80vw), no expand — card links directly on tap.
-// Tablet: same expand behavior as desktop but starts narrower (140px → 240px).
+// cardHeight prop controls physical height (default 190px for the new 3-section layout).
+// When cardHeight < 280 ("compact" mode): tighter padding, smaller icon (36px), shorter
+// description, fewer visible tags. All other visual behavior is preserved.
+//
+// Mobile: fixed ~80vw width, no hover expand — tap to navigate.
 
-import { useState } from "react";
+import { useState, cloneElement, isValidElement } from "react";
 import { useRouter } from "next/navigation";
 import { motion, type Variants } from "framer-motion";
 import type { Project } from "@/lib/data";
@@ -19,10 +22,22 @@ function hexToRgb(hex: string): string {
   return `${r},${g},${b}`;
 }
 
+// Resize a 48×48 SVG icon to any square size via React.cloneElement.
+function scaleIcon(
+  icon: React.ReactNode,
+  size: number
+): React.ReactNode {
+  if (size === 48 || !isValidElement(icon)) return icon;
+  return cloneElement(
+    icon as React.ReactElement<{ width?: number; height?: number }>,
+    { width: size, height: size }
+  );
+}
+
 // ── Per-project SVG icons ────────────────────────────────────
 // All icons: 48×48, viewBox 0 0 48 48, monoline, 1.5px stroke, currentColor.
 
-const PROJECT_ICONS: Record<string, React.ReactNode> = {
+export const PROJECT_ICONS: Record<string, React.ReactNode> = {
   audora: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <rect x="14" y="20" width="4" height="8" rx="2" stroke="currentColor" strokeWidth="1.5" />
@@ -115,19 +130,30 @@ export const cardEnterVariant: Variants = {
 
 interface ProjectCardProps {
   project: Project;
+  /** Physical card height in px. Values below 280 activate compact mode. Default: 190. */
+  cardHeight?: number;
+  /** Optional badge label shown top-right (e.g. "WIP", "PROTOTYPE"). */
+  badge?: string;
+  /** Desktop rest width in px. Default: 150. */
+  restWidth?: number;
+  /** Desktop hover (expanded) width in px. Default: 248. */
+  hoverWidth?: number;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, cardHeight = 190, badge, restWidth: deskRest = 150, hoverWidth: deskHover = 248 }: ProjectCardProps) {
+  const compact = cardHeight < 280;
+
   const [hovered, setHovered] = useState(false);
   const router = useRouter();
   const isMobile = useIsMobile();
   const rgb = hexToRgb(project.color);
 
-  // On mobile: fixed width card, no hover expansion
-  const restWidth = isMobile ? "80vw" : 160;
-  const hoverWidth = isMobile ? "80vw" : 260;
+  const restWidth = isMobile ? "80vw" : deskRest;
+  const hoverWidth = isMobile ? "80vw" : deskHover;
   const currentWidth = hovered && !isMobile ? hoverWidth : restWidth;
   const showExpanded = hovered && !isMobile;
+
+  const iconSize = compact ? 36 : 48;
 
   return (
     <motion.article
@@ -138,13 +164,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       onMouseLeave={() => setHovered(false)}
       style={{
         width: currentWidth,
-        height: 360,
+        height: cardHeight,
         borderRadius: 12,
         overflow: "hidden",
         cursor: "pointer",
         position: "relative",
         flexShrink: 0,
-        // scroll-snap on mobile
         scrollSnapAlign: isMobile ? "center" : undefined,
         transition: "width 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",
       }}
@@ -177,6 +202,29 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         }}
       />
 
+      {/* Badge */}
+      {badge && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            zIndex: 10,
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 8,
+            letterSpacing: "0.12em",
+            color: project.color,
+            background: `rgba(${rgb},0.1)`,
+            border: `1px solid rgba(${rgb},0.22)`,
+            borderRadius: 3,
+            padding: "2px 5px",
+          }}
+        >
+          {badge}
+        </div>
+      )}
+
       {/* Accent glow bar */}
       {showExpanded && (
         <div
@@ -186,10 +234,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             bottom: -2,
             left: "10%",
             right: "10%",
-            height: 3,
+            height: compact ? 2 : 3,
             borderRadius: 2,
             background: project.color,
-            boxShadow: `0 0 16px ${project.color}60, 0 0 40px ${project.color}20`,
+            boxShadow: `0 0 ${compact ? 12 : 16}px ${project.color}60, 0 0 ${compact ? 28 : 40}px ${project.color}20`,
           }}
         />
       )}
@@ -203,7 +251,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: showExpanded ? "28px 20px 20px" : "28px 16px 20px",
+          padding: showExpanded
+            ? compact ? "14px 16px 12px" : "28px 20px 20px"
+            : compact ? "18px 14px 14px" : "28px 16px 20px",
           textAlign: "center",
           transition: "padding 0.4s ease",
         }}
@@ -213,16 +263,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           style={{
             color: showExpanded ? project.color : isMobile ? "#7a7f8a" : "#4a4f5a",
             transition: "color 0.35s ease, transform 0.35s ease, filter 0.35s ease",
-            marginBottom: showExpanded ? 16 : 24,
+            marginBottom: showExpanded ? (compact ? 6 : 16) : (compact ? 10 : 24),
             transform: showExpanded ? "scale(1.1)" : "scale(1)",
-            filter: showExpanded ? `drop-shadow(0 0 8px ${project.color}40)` : "none",
+            filter: showExpanded ? `drop-shadow(0 0 ${compact ? 6 : 8}px ${project.color}40)` : "none",
             flex: showExpanded ? "0 0 auto" : "1 1 auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          {PROJECT_ICONS[project.slug] ?? null}
+          {scaleIcon(PROJECT_ICONS[project.slug] ?? null, iconSize)}
         </div>
 
         {/* Divider */}
@@ -234,7 +284,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             background: showExpanded
               ? `linear-gradient(90deg, transparent, ${project.color}40, transparent)`
               : "rgba(255,255,255,0.06)",
-            marginBottom: 16,
+            marginBottom: compact ? 8 : 16,
             transition: "width 0.35s ease, background 0.35s ease",
           }}
         />
@@ -244,7 +294,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           style={{
             fontFamily: "var(--font-rajdhani)",
             fontWeight: 700,
-            fontSize: showExpanded ? 22 : isMobile ? 16 : 15,
+            fontSize: showExpanded
+              ? compact ? 17 : 22
+              : isMobile ? 16 : compact ? 13 : 15,
             letterSpacing: "0.08em",
             color: showExpanded ? "#ffffff" : "#9ca0ab",
             margin: 0,
@@ -270,7 +322,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.category}
         </div>
 
-        {/* Description — visible on desktop hover or always on mobile */}
+        {/* Description */}
         {isMobile ? (
           <p
             style={{
@@ -291,12 +343,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: 11.5,
+              fontSize: compact ? 10.5 : 11.5,
               color: "#9ca0ab",
-              lineHeight: 1.6,
-              margin: "14px 0 0 0",
+              lineHeight: compact ? 1.5 : 1.6,
+              margin: `${compact ? 8 : 14}px 0 0 0`,
               opacity: showExpanded ? 1 : 0,
-              maxHeight: showExpanded ? 120 : 0,
+              maxHeight: showExpanded ? (compact ? 44 : 120) : 0,
               overflow: "hidden",
               transition: "opacity 0.35s ease 0.05s, max-height 0.35s ease 0.05s",
             }}
@@ -310,26 +362,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: 6,
+            gap: compact ? 4 : 6,
             justifyContent: "center",
             marginTop: "auto",
-            paddingTop: 12,
+            paddingTop: compact ? 6 : 12,
             opacity: showExpanded || isMobile ? 1 : 0,
             transition: "opacity 0.3s ease 0.1s",
           }}
         >
           {(showExpanded || isMobile) &&
-            project.tags.slice(0, isMobile ? 2 : 4).map((tag) => (
+            project.tags.slice(0, isMobile ? 2 : compact ? 3 : 4).map((tag) => (
               <span
                 key={tag}
                 style={{
                   fontFamily: "var(--font-dm-sans)",
-                  fontSize: 10,
+                  fontSize: compact ? 9 : 10,
                   color: "#6a6f7a",
                   background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.06)",
                   borderRadius: 4,
-                  padding: "2px 8px",
+                  padding: compact ? "1px 6px" : "2px 8px",
                 }}
               >
                 {tag}
@@ -337,18 +389,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             ))}
         </div>
 
-        {/* VIEW > — desktop hover only */}
+        {/* VIEW — desktop hover only */}
         {showExpanded && (
           <div
             aria-hidden="true"
             style={{
-              marginTop: 12,
+              marginTop: compact ? 6 : 12,
               display: "flex",
               alignItems: "center",
               gap: 6,
               fontFamily: "var(--font-rajdhani)",
               fontWeight: 600,
-              fontSize: 11,
+              fontSize: compact ? 10 : 11,
               letterSpacing: "0.1em",
               color: project.color,
             }}

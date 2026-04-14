@@ -9,13 +9,16 @@ import { useRouter } from "next/navigation";
 
 interface BackButtonProps {
   href?: string;
+  onClick?: () => void;
 }
 
-export default function BackButton({ href }: BackButtonProps) {
+export default function BackButton({ href, onClick }: BackButtonProps) {
   const router = useRouter();
 
   function handleBack() {
-    if (href) {
+    if (onClick) {
+      onClick();
+    } else if (href) {
       router.push(href);
     } else {
       router.back();
