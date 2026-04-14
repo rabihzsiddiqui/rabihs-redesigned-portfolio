@@ -23,7 +23,7 @@ export default function ProjectsPage() {
   return (
     <div
       className="flex flex-col h-full"
-      style={{ padding: "28px 48px 20px" }}
+      style={{ padding: "28px clamp(16px, 4vw, 48px) 20px" }}
     >
       <ProjectBrowser />
     </div>

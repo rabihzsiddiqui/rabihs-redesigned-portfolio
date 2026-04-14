@@ -159,7 +159,7 @@ function ProjectGrid({
           overflowX: "auto",
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",
-          padding: "8px 0 12px",
+          padding: "8px 4px 12px",
           scrollbarWidth: "thin",
           scrollbarColor: "rgba(255,255,255,0.06) transparent",
           width: "100%",
@@ -169,7 +169,7 @@ function ProjectGrid({
           <ProjectCard
             key={project.slug}
             project={project}
-            cardHeight={360}
+            cardHeight={300}
             badge={BADGES[project.slug]}
           />
         ))}
