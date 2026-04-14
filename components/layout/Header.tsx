@@ -92,15 +92,6 @@ function ProfileCorner() {
               backgroundImage: "url('/Geisel.png')",
               backgroundSize: "cover",
               backgroundPosition: "center 60%",
-              opacity: 0.12,
-            }}
-          />
-          {/* Dark overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(90deg, rgba(6,8,16,0.85) 0%, rgba(6,8,16,0.6) 100%)",
             }}
           />
           {/* Text */}
@@ -120,7 +111,7 @@ function ProfileCorner() {
                 fontFamily: "var(--font-rajdhani)",
                 fontWeight: 700,
                 fontSize: 13,
-                color: "#e8eaed",
+                color: "#000",
                 letterSpacing: "0.06em",
                 lineHeight: 1.2,
                 whiteSpace: "nowrap",
@@ -132,7 +123,7 @@ function ProfileCorner() {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: 10,
-                color: "#00d4ff",
+                color: "#1a1a2e",
                 letterSpacing: "0.03em",
               }}
             >
@@ -246,45 +237,20 @@ export default function Header() {
         style={{ textDecoration: "none", display: "flex", alignItems: "center" }}
       >
         {isHome ? (
-          // Main route: large wordmark on desktop, R badge on mobile
-          <>
-            {/* Desktop wordmark */}
-            <span
-              className="hidden sm:inline"
-              style={{
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 700,
-                fontSize: 28,
-                color: "#e8eaed",
-                letterSpacing: "0.06em",
-                lineHeight: 1,
-                textShadow: "0 0 30px rgba(0,212,255,0.08)",
-              }}
-            >
-              RABIH.APP
-            </span>
-            {/* Mobile monogram */}
-            <div
-              className="sm:hidden"
-              aria-hidden="true"
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 7,
-                background: "linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.08))",
-                border: "1px solid rgba(0,212,255,0.25)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 700,
-                fontSize: 16,
-                color: "#00d4ff",
-              }}
-            >
-              R
-            </div>
-          </>
+          // Main route: wordmark at all screen sizes
+          <span
+            style={{
+              fontFamily: "var(--font-rajdhani)",
+              fontWeight: 700,
+              fontSize: 28,
+              color: "#e8eaed",
+              letterSpacing: "0.06em",
+              lineHeight: 1,
+              textShadow: "0 0 30px rgba(0,212,255,0.08)",
+            }}
+          >
+            RABIH.APP
+          </span>
         ) : (
           // Sub-routes: muted wordmark only
           <span
