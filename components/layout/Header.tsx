@@ -1,0 +1,304 @@
+"use client";
+
+// components/layout/Header.tsx
+// Persistent top bar across all routes.
+//
+// Desktop: left = wordmark, right = ContactButton + ProfileCorner
+// Mobile:  left = R monogram, right = ContactButton + R monogram (profile only)
+//
+// ProfileCorner supports both hover (desktop) and click/tap (mobile).
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import ContactButton from "@/components/contact/ContactButton";
+import { identity } from "@/lib/data";
+
+// ── ProfileCorner ─────────────────────────────────────────────────────────────
+
+function ProfileCorner() {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const links = [
+    { label: "GitHub", href: identity.github },
+    { label: "LinkedIn", href: identity.linkedin },
+    { label: "Resume", href: "#" },
+  ];
+
+  // Click-outside closes the dropdown (important for mobile tap)
+  useEffect(() => {
+    if (!open) return;
+    function handlePointerDown(e: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [open]);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+      // Desktop: hover opens dropdown
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      {/* Name + domain — hidden on mobile */}
+      <div
+        className="hidden md:block"
+        style={{ textAlign: "right" }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-rajdhani)",
+            fontWeight: 700,
+            fontSize: 14,
+            color: "#e8eaed",
+            letterSpacing: "0.05em",
+            lineHeight: 1.2,
+          }}
+        >
+          {identity.name.toUpperCase()}
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 11,
+            color: "#00d4ff",
+            letterSpacing: "0.03em",
+          }}
+        >
+          {identity.domain}
+        </div>
+      </div>
+
+      {/* Monogram badge — always visible, acts as tap target on mobile */}
+      <button
+        aria-label="Profile menu"
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => setOpen((v) => !v)}
+        style={{
+          width: 38,
+          height: 38,
+          borderRadius: 8,
+          background:
+            "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05))",
+          border: "1px solid rgba(0,212,255,0.2)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "var(--font-rajdhani)",
+          fontWeight: 700,
+          fontSize: 15,
+          color: "#00d4ff",
+          flexShrink: 0,
+          cursor: "pointer",
+          transition: "box-shadow 0.3s ease",
+          boxShadow: open ? "0 0 20px rgba(0,212,255,0.15)" : "none",
+        }}
+      >
+        R
+      </button>
+
+      {/* Dropdown */}
+      <div
+        role="menu"
+        aria-label="Profile links"
+        style={{
+          position: "absolute",
+          top: "calc(100% + 10px)",
+          right: 0,
+          background: "rgba(10,12,20,0.97)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: 10,
+          padding: "14px 18px",
+          minWidth: 190,
+          opacity: open ? 1 : 0,
+          transform: open ? "translateY(0)" : "translateY(-6px)",
+          transition: "opacity 0.2s ease, transform 0.2s ease",
+          pointerEvents: open ? "auto" : "none",
+          zIndex: 200,
+        }}
+      >
+        {links.map((link) => (
+          <ProfileLink key={link.label} href={link.href} label={link.label} />
+        ))}
+
+        {/* Status indicator */}
+        <div
+          style={{
+            marginTop: 10,
+            paddingTop: 10,
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <div
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "#10b981",
+              boxShadow: "0 0 8px rgba(16,185,129,0.4)",
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 10,
+              color: "#5a5f6a",
+            }}
+          >
+            {identity.status}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProfileLink({ href, label }: { href: string; label: string }) {
+  const isExternal = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      role="menuitem"
+      style={{
+        display: "block",
+        padding: "6px 0",
+        fontFamily: "var(--font-dm-sans)",
+        fontSize: 12,
+        color: "#7a7f8a",
+        textDecoration: "none",
+        transition: "color 0.2s ease",
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = "#00d4ff"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = "#7a7f8a"; }}
+    >
+      {label}
+    </a>
+  );
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  return (
+    <header
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
+      style={{ height: 72, padding: "0 20px" }}
+    >
+      {/* Brand */}
+      <Link
+        href="/"
+        aria-label="rabih.app — home"
+        style={{ textDecoration: "none", display: "flex", alignItems: "center" }}
+      >
+        {isHome ? (
+          // Main route: large wordmark on desktop, R badge on mobile
+          <>
+            {/* Desktop wordmark */}
+            <span
+              className="hidden sm:inline"
+              style={{
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 700,
+                fontSize: 28,
+                color: "#e8eaed",
+                letterSpacing: "0.06em",
+                lineHeight: 1,
+                textShadow: "0 0 30px rgba(0,212,255,0.08)",
+              }}
+            >
+              RABIH.APP
+            </span>
+            {/* Mobile monogram */}
+            <div
+              className="sm:hidden"
+              aria-hidden="true"
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 7,
+                background: "linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.08))",
+                border: "1px solid rgba(0,212,255,0.25)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 700,
+                fontSize: 16,
+                color: "#00d4ff",
+              }}
+            >
+              R
+            </div>
+          </>
+        ) : (
+          // Sub-routes: R badge + muted wordmark on desktop, R badge only on mobile
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div
+              aria-hidden="true"
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                background: "linear-gradient(135deg, #00d4ff 0%, #0088aa 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 700,
+                fontSize: 14,
+                color: "#060810",
+                flexShrink: 0,
+              }}
+            >
+              R
+            </div>
+            <span
+              className="hidden sm:inline"
+              style={{
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 600,
+                fontSize: 14,
+                color: "#4a4f5a",
+                letterSpacing: "0.08em",
+              }}
+            >
+              RABIH.APP
+            </span>
+          </div>
+        )}
+      </Link>
+
+      {/* Right: contact + profile */}
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <ContactButton />
+        <ProfileCorner />
+      </div>
+    </header>
+  );
+}
