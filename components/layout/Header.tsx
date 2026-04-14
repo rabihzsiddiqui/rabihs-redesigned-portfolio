@@ -82,7 +82,7 @@ function ProfileCorner() {
         {/* Name section with Geisel background — hidden on mobile */}
         <div
           className="hidden sm:block"
-          style={{ position: "relative", padding: "0 12px", minWidth: 130 }}
+          style={{ position: "relative", padding: "0 14px", minWidth: 210 }}
         >
           {/* Geisel background */}
           <div
@@ -91,7 +91,15 @@ function ProfileCorner() {
               inset: 0,
               backgroundImage: "url('/Geisel.png')",
               backgroundSize: "cover",
-              backgroundPosition: "center 60%",
+              backgroundPosition: "right center",
+            }}
+          />
+          {/* Dark gradient: opaque on left for text, fades right to show Geisel */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(90deg, rgba(6,8,16,0.96) 0%, rgba(6,8,16,0.96) 50%, rgba(6,8,16,0.1) 100%)",
             }}
           />
           {/* Text */}
@@ -111,7 +119,7 @@ function ProfileCorner() {
                 fontFamily: "var(--font-rajdhani)",
                 fontWeight: 700,
                 fontSize: 13,
-                color: "#000",
+                color: "#e8eaed",
                 letterSpacing: "0.06em",
                 lineHeight: 1.2,
                 whiteSpace: "nowrap",
@@ -123,11 +131,12 @@ function ProfileCorner() {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: 10,
-                color: "#1a1a2e",
+                color: "#7a7f8a",
                 letterSpacing: "0.03em",
+                fontStyle: "italic",
               }}
             >
-              {identity.domain}
+              UCSD Bachelor
             </div>
           </div>
         </div>
