@@ -85,15 +85,14 @@ function ProfileCorner() {
           style={{ position: "relative", padding: "0 14px", minWidth: 210 }}
         >
           {/* Geisel background */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: "url('/Geisel.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "right center",
-            }}
-          />
+          <div style={{ position: "absolute", inset: 0 }}>
+            <Image
+              src="/Geisel.png"
+              alt=""
+              fill
+              style={{ objectFit: "cover", objectPosition: "80% center" }}
+            />
+          </div>
           {/* Dark gradient: opaque on left for text, fades right to show Geisel */}
           <div
             style={{
@@ -149,6 +148,7 @@ function ProfileCorner() {
         style={{
           position: "absolute",
           top: "calc(100% + 10px)",
+          left: 0,
           right: 0,
           background: "rgba(10,12,20,0.97)",
           backdropFilter: "blur(20px)",
@@ -156,7 +156,6 @@ function ProfileCorner() {
           border: "1px solid rgba(255,255,255,0.08)",
           borderRadius: 10,
           padding: "14px 18px",
-          minWidth: 190,
           opacity: open ? 1 : 0,
           transform: open ? "translateY(0)" : "translateY(-6px)",
           transition: "opacity 0.2s ease, transform 0.2s ease",
@@ -175,6 +174,7 @@ function ProfileCorner() {
             borderTop: "1px solid rgba(255,255,255,0.06)",
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             gap: 6,
           }}
         >
@@ -215,9 +215,12 @@ function ProfileLink({ href, label }: { href: string; label: string }) {
         display: "block",
         padding: "6px 0",
         fontFamily: "var(--font-dm-sans)",
-        fontSize: 12,
+        fontSize: 11,
         color: "#7a7f8a",
         textDecoration: "none",
+        textAlign: "center",
+        textTransform: "uppercase",
+        letterSpacing: "0.1em",
         transition: "color 0.2s ease",
       }}
       onMouseEnter={(e) => { e.currentTarget.style.color = "#00d4ff"; }}
