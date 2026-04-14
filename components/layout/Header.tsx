@@ -3,13 +3,12 @@
 // components/layout/Header.tsx
 // Persistent top bar across all routes.
 //
-// Desktop: left = wordmark, right = ContactButton + ProfileCorner
-// Mobile:  left = R monogram, right = ContactButton + R monogram (profile only)
-//
-// ProfileCorner supports both hover (desktop) and click/tap (mobile).
+// Desktop: left = wordmark, right = ProfileCorner + ContactButton
+// Mobile:  left = R monogram, right = ProfileCorner + ContactButton
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import ContactButton from "@/components/contact/ContactButton";
 import { identity } from "@/lib/data";
@@ -26,7 +25,6 @@ function ProfileCorner() {
     { label: "Resume", href: "#" },
   ];
 
-  // Click-outside closes the dropdown (important for mobile tap)
   useEffect(() => {
     if (!open) return;
     function handlePointerDown(e: MouseEvent) {
@@ -44,72 +42,104 @@ function ProfileCorner() {
   return (
     <div
       ref={containerRef}
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-      }}
-      // Desktop: hover opens dropdown
+      style={{ position: "relative" }}
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      {/* Name + domain — hidden on mobile */}
-      <div
-        className="hidden md:block"
-        style={{ textAlign: "right" }}
-      >
-        <div
-          style={{
-            fontFamily: "var(--font-rajdhani)",
-            fontWeight: 700,
-            fontSize: 14,
-            color: "#e8eaed",
-            letterSpacing: "0.05em",
-            lineHeight: 1.2,
-          }}
-        >
-          {identity.name.toUpperCase()}
-        </div>
-        <div
-          style={{
-            fontFamily: "var(--font-dm-sans)",
-            fontSize: 11,
-            color: "#00d4ff",
-            letterSpacing: "0.03em",
-          }}
-        >
-          {identity.domain}
-        </div>
-      </div>
-
-      {/* Monogram badge — always visible, acts as tap target on mobile */}
+      {/* Name card: avatar + Geisel background + name */}
       <button
         aria-label="Profile menu"
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
         style={{
-          width: 38,
-          height: 38,
-          borderRadius: 8,
-          background:
-            "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05))",
-          border: "1px solid rgba(0,212,255,0.2)",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "var(--font-rajdhani)",
-          fontWeight: 700,
-          fontSize: 15,
-          color: "#00d4ff",
-          flexShrink: 0,
+          alignItems: "stretch",
+          height: 38,
+          border: "1px solid rgba(0,212,255,0.2)",
+          borderRadius: 8,
+          overflow: "hidden",
+          background: "transparent",
           cursor: "pointer",
-          transition: "box-shadow 0.3s ease",
-          boxShadow: open ? "0 0 20px rgba(0,212,255,0.15)" : "none",
+          padding: 0,
+          transition: "border-color 0.25s ease, box-shadow 0.25s ease",
+          boxShadow: open ? "0 0 16px rgba(0,212,255,0.12)" : "none",
         }}
       >
-        R
+        {/* Avatar */}
+        <div style={{ width: 38, flexShrink: 0, position: "relative" }}>
+          <Image
+            src="/RabihVector.png"
+            alt="Rabih Siddiqui"
+            fill
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+
+        {/* Divider */}
+        <div style={{ width: 1, background: "rgba(0,212,255,0.15)", flexShrink: 0 }} />
+
+        {/* Name section with Geisel background — hidden on mobile */}
+        <div
+          className="hidden sm:block"
+          style={{ position: "relative", padding: "0 12px", minWidth: 130 }}
+        >
+          {/* Geisel background */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: "url('/Geisel.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center 60%",
+              opacity: 0.12,
+            }}
+          />
+          {/* Dark overlay */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(90deg, rgba(6,8,16,0.85) 0%, rgba(6,8,16,0.6) 100%)",
+            }}
+          />
+          {/* Text */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              textAlign: "left",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 700,
+                fontSize: 13,
+                color: "#e8eaed",
+                letterSpacing: "0.06em",
+                lineHeight: 1.2,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {identity.name.toUpperCase()}
+            </div>
+            <div
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: 10,
+                color: "#00d4ff",
+                letterSpacing: "0.03em",
+              }}
+            >
+              {identity.domain}
+            </div>
+          </div>
+        </div>
       </button>
 
       {/* Dropdown */}
@@ -138,7 +168,6 @@ function ProfileCorner() {
           <ProfileLink key={link.label} href={link.href} label={link.label} />
         ))}
 
-        {/* Status indicator */}
         <div
           style={{
             marginTop: 10,
@@ -272,10 +301,10 @@ export default function Header() {
         )}
       </Link>
 
-      {/* Right: contact + profile */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <ContactButton />
+      {/* Right: profile card + email button */}
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <ProfileCorner />
+        <ContactButton />
       </div>
     </header>
   );
