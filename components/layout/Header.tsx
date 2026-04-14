@@ -85,7 +85,7 @@ function ProfileCorner() {
           style={{ position: "relative", padding: "0 14px", minWidth: 210 }}
         >
           {/* Geisel background */}
-          <div style={{ position: "absolute", inset: 0 }}>
+          <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
             <Image
               src="/Geisel.png"
               alt=""
