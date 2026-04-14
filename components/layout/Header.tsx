@@ -23,7 +23,7 @@ function ProfileCorner() {
   const links = [
     { label: "GitHub", href: identity.github },
     { label: "LinkedIn", href: identity.linkedin },
-    { label: "Resume", href: "#" },
+    { label: "Resume", href: "/Rabih_Siddiqui_Resume.pdf" },
   ];
 
   useEffect(() => {
@@ -216,7 +216,7 @@ function ProfileCorner() {
 }
 
 function ProfileLink({ href, label }: { href: string; label: string }) {
-  const isExternal = href.startsWith("http");
+  const isExternal = href.startsWith("http") || href.endsWith(".pdf");
   return (
     <a
       href={href}

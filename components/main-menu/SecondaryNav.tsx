@@ -14,8 +14,7 @@ import { identity } from "@/lib/data";
 const LINKS = [
   { label: "GITHUB", href: identity.github },
   { label: "LINKEDIN", href: identity.linkedin },
-  // Resume URL is not yet in identity data — wire up when added
-  { label: "RESUME", href: "#" },
+  { label: "RESUME", href: "/Rabih_Siddiqui_Resume.pdf" },
 ];
 
 // Stagger container — secondary links.
