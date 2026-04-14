@@ -257,40 +257,18 @@ export default function Header() {
             </div>
           </>
         ) : (
-          // Sub-routes: R badge + muted wordmark on desktop, R badge only on mobile
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div
-              aria-hidden="true"
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: 6,
-                background: "linear-gradient(135deg, #00d4ff 0%, #0088aa 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 700,
-                fontSize: 14,
-                color: "#060810",
-                flexShrink: 0,
-              }}
-            >
-              R
-            </div>
-            <span
-              className="hidden sm:inline"
-              style={{
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 600,
-                fontSize: 14,
-                color: "#4a4f5a",
-                letterSpacing: "0.08em",
-              }}
-            >
-              RABIH.APP
-            </span>
-          </div>
+          // Sub-routes: muted wordmark only
+          <span
+            style={{
+              fontFamily: "var(--font-rajdhani)",
+              fontWeight: 600,
+              fontSize: 14,
+              color: "#4a4f5a",
+              letterSpacing: "0.08em",
+            }}
+          >
+            RABIH.APP
+          </span>
         )}
       </Link>
 
