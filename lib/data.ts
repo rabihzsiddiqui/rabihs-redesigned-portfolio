@@ -11,7 +11,7 @@ export const identity = {
   name: "Rabih Siddiqui",
   domain: "rabih.app",
   email: "rabihzsiddiqui@gmail.com",
-  title: "Cognitive Scientist · UX Researcher · Product Tester",
+  title: "Aspiring UX Researcher / Developer",
   shortTitle: "Cognitive Science & UX",
   bio: "Cognitive Science graduate from UC San Diego with hands-on experience in product testing and participation in user research through Meta and Google.",
   status: "Open to opportunities",

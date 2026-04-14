@@ -12,6 +12,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   identity,
@@ -75,27 +76,25 @@ export default function AboutContent({ initialTab }: AboutContentProps) {
             className="flex items-center"
             style={{ gap: 18, marginBottom: 24 }}
           >
-            {/* Monogram badge */}
+            {/* Avatar */}
             <div
               style={{
                 width: isMobile ? 52 : 68,
                 height: isMobile ? 52 : 68,
                 borderRadius: 10,
-                background:
-                  "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05))",
                 border: "1px solid rgba(0,212,255,0.15)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 700,
-                fontSize: isMobile ? 20 : 26,
-                color: "#00d4ff",
+                overflow: "hidden",
+                position: "relative",
                 flexShrink: 0,
               }}
-              aria-hidden="true"
             >
-              R
+              <Image
+                src="/RabihVector.png"
+                alt="Rabih Siddiqui"
+                fill
+                sizes="68px"
+                style={{ objectFit: "cover" }}
+              />
             </div>
 
             <div>
@@ -403,6 +402,81 @@ function ExperienceTab({ isMobile }: { isMobile: boolean }) {
       initial="initial"
       animate="animate"
     >
+      {/* Education entry */}
+      <motion.div
+        variants={listItemVariants}
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? 4 : 20,
+          padding: "16px 22px",
+          borderRadius: 8,
+          transition: "background 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLDivElement).style.background =
+            "rgba(255,255,255,0.02)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLDivElement).style.background = "transparent";
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 11,
+            color: "#4a4f5a",
+            minWidth: isMobile ? undefined : 110,
+            paddingTop: isMobile ? 0 : 2,
+            flexShrink: 0,
+          }}
+        >
+          {education.year}
+        </div>
+        <div>
+          <div
+            style={{
+              fontFamily: "var(--font-rajdhani)",
+              fontWeight: 700,
+              fontSize: 15,
+              color: "#e8eaed",
+              letterSpacing: "0.03em",
+            }}
+          >
+            {education.degree}
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 12,
+              color: "#00d4ff",
+              marginTop: 2,
+            }}
+          >
+            {education.school}
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 12,
+              color: "#5a5f6a",
+              marginTop: 4,
+              lineHeight: 1.5,
+            }}
+          >
+            {education.description}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Divider */}
+      <div
+        style={{
+          margin: "14px 0",
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+        }}
+      />
+
       {experiences.map((exp, i) => (
         <motion.div
           key={`${exp.company}-${i}`}
@@ -507,81 +581,6 @@ function ExperienceTab({ isMobile }: { isMobile: boolean }) {
           </div>
         </motion.div>
       ))}
-
-      {/* Education entry */}
-      <div
-        style={{
-          marginTop: 16,
-          paddingTop: 16,
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-        }}
-      >
-        <motion.div
-          variants={listItemVariants}
-          style={{
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            gap: isMobile ? 4 : 20,
-            padding: "16px 22px",
-            borderRadius: 8,
-            transition: "background 0.2s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLDivElement).style.background =
-              "rgba(255,255,255,0.02)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLDivElement).style.background = "transparent";
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "var(--font-dm-sans)",
-              fontSize: 11,
-              color: "#4a4f5a",
-              minWidth: isMobile ? undefined : 110,
-              paddingTop: isMobile ? 0 : 2,
-              flexShrink: 0,
-            }}
-          >
-            {education.year}
-          </div>
-          <div>
-            <div
-              style={{
-                fontFamily: "var(--font-rajdhani)",
-                fontWeight: 700,
-                fontSize: 15,
-                color: "#e8eaed",
-                letterSpacing: "0.03em",
-              }}
-            >
-              {education.degree}
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 12,
-                color: "#00d4ff",
-                marginTop: 2,
-              }}
-            >
-              {education.school}
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 12,
-                color: "#5a5f6a",
-                marginTop: 4,
-                lineHeight: 1.5,
-              }}
-            >
-              {education.description}
-            </div>
-          </div>
-        </motion.div>
-      </div>
     </motion.div>
   );
 }

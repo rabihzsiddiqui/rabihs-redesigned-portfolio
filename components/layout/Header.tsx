@@ -18,6 +18,7 @@ import { identity } from "@/lib/data";
 function ProfileCorner() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const links = [
     { label: "GitHub", href: identity.github },
@@ -39,12 +40,21 @@ function ProfileCorner() {
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [open]);
 
+  function handleMouseEnter() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+  }
+
+  function handleMouseLeave() {
+    closeTimer.current = setTimeout(() => setOpen(false), 250);
+  }
+
   return (
     <div
       ref={containerRef}
       style={{ position: "relative" }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Name card: avatar + Geisel background + name */}
       <button
