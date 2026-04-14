@@ -72,6 +72,7 @@ function ProfileCorner() {
             src="/RabihVector.png"
             alt="Rabih Siddiqui"
             fill
+            sizes="38px"
             style={{ objectFit: "cover" }}
           />
         </div>
@@ -90,6 +91,7 @@ function ProfileCorner() {
               src="/Geisel.png"
               alt=""
               fill
+              sizes="(max-width: 640px) 0px, 210px"
               style={{ objectFit: "cover", objectPosition: "65% center", transform: "scale(1.25)", transformOrigin: "center center" }}
             />
           </div>
