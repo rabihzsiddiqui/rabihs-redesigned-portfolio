@@ -90,7 +90,7 @@ function ProfileCorner() {
               src="/Geisel.png"
               alt=""
               fill
-              style={{ objectFit: "cover", objectPosition: "80% center" }}
+              style={{ objectFit: "cover", objectPosition: "65% center" }}
             />
           </div>
           {/* Dark gradient: opaque on left for text, fades right to show Geisel */}
