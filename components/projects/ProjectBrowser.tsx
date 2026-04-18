@@ -224,7 +224,8 @@ function ProjectGrid({
                 <ProjectCard
                   project={project}
                   cardHeight={164}
-                  restWidth={120}
+                  hoverHeight={240}
+                  restWidth={STACK_HOVER_W}
                   hoverWidth={STACK_HOVER_W}
                 />
               </motion.div>
