@@ -348,9 +348,17 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
               lineHeight: compact ? 1.5 : 1.6,
               margin: `${compact ? 8 : 14}px 0 0 0`,
               opacity: showExpanded ? 1 : 0,
-              maxHeight: showExpanded ? (compact ? 44 : 120) : 0,
+              // maxHeight snaps (not animated) so text doesn't scroll into view.
+              // On enter: height appears instantly, then opacity fades in.
+              // On leave: opacity fades first, then height collapses after the fade.
+              maxHeight: showExpanded ? (compact ? 36 : 80) : 0,
               overflow: "hidden",
-              transition: "opacity 0.35s ease 0.05s, max-height 0.35s ease 0.05s",
+              display: "-webkit-box",
+              WebkitLineClamp: compact ? 2 : 4,
+              WebkitBoxOrient: "vertical",
+              transition: showExpanded
+                ? "opacity 0.38s ease 0.1s"
+                : "opacity 0.18s ease, max-height 0s 0.22s",
             }}
           >
             {project.description}

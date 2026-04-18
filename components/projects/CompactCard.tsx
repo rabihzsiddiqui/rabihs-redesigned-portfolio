@@ -261,7 +261,7 @@ function ExperimentalContent({
         {project.category}
       </div>
 
-      {/* 1-line description — appears on hover */}
+      {/* 1-line description — fades in on hover, no scroll-reveal */}
       <p
         style={{
           fontFamily: "var(--font-dm-sans)",
@@ -272,11 +272,13 @@ function ExperimentalContent({
           opacity: showExpanded ? 1 : 0,
           maxHeight: showExpanded ? 14 : 0,
           overflow: "hidden",
-          transition: "opacity 0.3s ease 0.05s, max-height 0.3s ease 0.05s, margin 0.3s ease",
           whiteSpace: "nowrap",
           textOverflow: "ellipsis",
           width: "100%",
           flexShrink: 0,
+          transition: showExpanded
+            ? "opacity 0.32s ease 0.08s"
+            : "opacity 0.15s ease, max-height 0s 0.18s, margin 0s 0.18s",
         }}
       >
         {project.description}
