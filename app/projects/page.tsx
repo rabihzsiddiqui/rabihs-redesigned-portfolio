@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: "https://rabih.app/projects",
   },
   openGraph: {
-    title: "Projects — Rabih Siddiqui",
+    title: "Projects | Rabih Siddiqui",
     description: "A selection of tools, prototypes, and experiments.",
     url: "https://rabih.app/projects",
   },

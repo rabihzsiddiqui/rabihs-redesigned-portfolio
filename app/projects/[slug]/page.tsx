@@ -29,7 +29,7 @@ export async function generateMetadata({
       canonical: `https://rabih.app/projects/${project.slug}`,
     },
     openGraph: {
-      title: `${project.name} — Rabih Siddiqui`,
+      title: `${project.name} | Rabih Siddiqui`,
       description: project.description,
       url: `https://rabih.app/projects/${project.slug}`,
     },

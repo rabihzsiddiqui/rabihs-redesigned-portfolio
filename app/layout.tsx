@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rabih.app"),
   title: {
     default: "Rabih Siddiqui",
-    template: "%s — Rabih Siddiqui",
+    template: "%s | Rabih Siddiqui",
   },
   description:
     "Cognitive Scientist and product-focused developer. Designing and building thoughtful interfaces.",
