@@ -4,7 +4,7 @@
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { projects } from "@/lib/data";
+import { projects, SLUG_TO_CATEGORY } from "@/lib/data";
 import BackButton from "@/components/layout/BackButton";
 import ActionLink from "@/components/projects/ActionLink";
 
@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({
   if (!project) notFound();
 
   const actionLinks = [
-    project.liveUrl && { label: "LIVE SITE", href: project.liveUrl },
+    project.liveUrl && { label: "LAUNCH", href: project.liveUrl },
     project.sourceUrl && { label: "SOURCE", href: project.sourceUrl },
     project.slidesUrl && { label: "SLIDES", href: project.slidesUrl },
   ].filter(Boolean) as { label: string; href: string }[];
@@ -245,7 +245,10 @@ export default async function ProjectDetailPage({
 
       {/* Back button */}
       <div className="flex justify-end" style={{ paddingTop: 12 }}>
-        <BackButton href="/projects" />
+        <BackButton
+          href={`/projects?category=${SLUG_TO_CATEGORY[project.slug] ?? ""}`}
+          escKey
+        />
       </div>
     </div>
   );

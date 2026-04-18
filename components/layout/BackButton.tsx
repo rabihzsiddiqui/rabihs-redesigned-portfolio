@@ -1,18 +1,15 @@
 "use client";
 
-// components/layout/BackButton.tsx
-// "ESC BACK" bordered button — bottom-right of sub-route pages.
-// Navigates to `href` if provided, otherwise browser history back.
-// Keyboard: Enter/Space trigger navigation (native button behavior).
-
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface BackButtonProps {
   href?: string;
   onClick?: () => void;
+  escKey?: boolean;
 }
 
-export default function BackButton({ href, onClick }: BackButtonProps) {
+export default function BackButton({ href, onClick, escKey }: BackButtonProps) {
   const router = useRouter();
 
   function handleBack() {
@@ -24,6 +21,22 @@ export default function BackButton({ href, onClick }: BackButtonProps) {
       router.back();
     }
   }
+
+  useEffect(() => {
+    if (!escKey) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (onClick) {
+        onClick();
+      } else if (href) {
+        router.push(href);
+      } else {
+        router.back();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [escKey, href, onClick, router]);
 
   return (
     <button
@@ -54,7 +67,7 @@ export default function BackButton({ href, onClick }: BackButtonProps) {
         e.currentTarget.style.color = "#5a5f6a";
       }}
     >
-      <span aria-hidden="true" style={{ fontSize: 10, opacity: 0.5 }}>ESC</span>
+      <span aria-hidden="true" className="hidden sm:inline" style={{ fontSize: 10, opacity: 0.5 }}>ESC</span>
       BACK
     </button>
   );

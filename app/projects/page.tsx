@@ -3,6 +3,7 @@
 // Layout: top-left title + count, center card grid, bottom-right back button.
 // Mobile title: 36px. Desktop: 56px.
 
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import ProjectBrowser from "@/components/projects/ProjectBrowser";
 
@@ -25,7 +26,9 @@ export default function ProjectsPage() {
       className="flex flex-col h-full"
       style={{ padding: "28px clamp(16px, 4vw, 48px) 20px" }}
     >
-      <ProjectBrowser />
+      <Suspense>
+        <ProjectBrowser />
+      </Suspense>
     </div>
   );
 }

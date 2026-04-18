@@ -325,6 +325,21 @@ export const projects: Project[] = [
   },
 ];
 
+// ── Slug → browser category mapping ────────────────────────
+// Used by the project detail page to back-link to the correct Level 2 grid.
+
+export const SLUG_TO_CATEGORY: Record<string, "tools" | "experiments" | "research"> = {
+  audora:                     "tools",
+  compresso:                  "tools",
+  screen:                     "tools",
+  pomodoro:                   "tools",
+  scribe:                     "tools",
+  spectra:                    "experiments",
+  nyra:                       "experiments",
+  "restaurant-rating-analysis": "research",
+  visa:                       "research",
+};
+
 // ── Certificates (in progress) ─────────────────────────────
 
 export const certificates = [

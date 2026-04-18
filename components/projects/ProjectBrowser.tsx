@@ -13,7 +13,7 @@
 // Mobile: Level 1 is a stacked vertical list; Level 2 is a horizontal scroll.
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { projects } from "@/lib/data";
 import { useIsMobile } from "@/lib/useMediaQuery";
@@ -295,8 +295,14 @@ function ProjectGrid({
 
 // ── Main export ────────────────────────────────────────────────────────────────
 
+const VALID_CATEGORIES: CategoryId[] = ["tools", "experiments", "research"];
+
 export default function ProjectBrowser() {
-  const [selected, setSelected] = useState<CategoryId | null>(null);
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category") as CategoryId | null;
+  const [selected, setSelected] = useState<CategoryId | null>(
+    initialCategory && VALID_CATEGORIES.includes(initialCategory) ? initialCategory : null
+  );
   const router = useRouter();
   const isMobile = useIsMobile();
 
