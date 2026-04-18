@@ -325,7 +325,7 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
           {project.category}
         </div>
 
-        {/* Description — mobile always shown, desktop only for non-compact cards */}
+        {/* Description — mobile always shown, desktop shown on hover for all cards */}
         {isMobile ? (
           <p
             style={{
@@ -338,7 +338,7 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
           >
             {project.shortDescription}
           </p>
-        ) : !compact && (
+        ) : (
           <AnimatePresence>
             {showExpanded && (
               <motion.p
@@ -348,10 +348,10 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
                 exit={{ opacity: 0, transition: { duration: 0 } }}
                 style={{
                   fontFamily: "var(--font-dm-sans)",
-                  fontSize: 11,
+                  fontSize: compact ? 10.5 : 11,
                   color: "#9ca0ab",
-                  lineHeight: 1.6,
-                  margin: "14px 0 0 0",
+                  lineHeight: compact ? 1.5 : 1.6,
+                  margin: compact ? "8px 0 0 0" : "14px 0 0 0",
                 }}
               >
                 {project.shortDescription}
