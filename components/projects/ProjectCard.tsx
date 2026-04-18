@@ -370,7 +370,7 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
             marginTop: "auto",
             paddingTop: compact ? 6 : 12,
             opacity: showExpanded || isMobile ? 1 : 0,
-            transition: "opacity 0.3s ease 0.1s",
+            transition: "opacity 0.2s ease 0.35s",
           }}
         >
           {(showExpanded || isMobile) &&
@@ -392,34 +392,40 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
             ))}
         </div>
 
-        {/* VIEW — desktop hover only */}
-        {showExpanded && (
-          <div
-            aria-hidden="true"
-            style={{
-              marginTop: compact ? 6 : 12,
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: "var(--font-rajdhani)",
-              fontWeight: 600,
-              fontSize: compact ? 10 : 11,
-              letterSpacing: "0.1em",
-              color: project.color,
-            }}
-          >
-            VIEW
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path
-                d="M3 7h8M8 4l3 3-3 3"
-                stroke={project.color}
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        )}
+        {/* VIEW — desktop hover only, delayed to appear after card has expanded */}
+        <AnimatePresence>
+          {showExpanded && (
+            <motion.div
+              key="view"
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { delay: 0.35, duration: 0.2 } }}
+              exit={{ opacity: 0, transition: { duration: 0 } }}
+              style={{
+                marginTop: compact ? 6 : 12,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                fontFamily: "var(--font-rajdhani)",
+                fontWeight: 600,
+                fontSize: compact ? 10 : 11,
+                letterSpacing: "0.1em",
+                color: project.color,
+              }}
+            >
+              VIEW
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M3 7h8M8 4l3 3-3 3"
+                  stroke={project.color}
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Mobile: tap hint */}
         {isMobile && (

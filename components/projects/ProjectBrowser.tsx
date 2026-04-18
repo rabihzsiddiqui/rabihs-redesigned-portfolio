@@ -249,7 +249,7 @@ function ProjectGrid({
           variants={projectRowVariants}
           initial="initial"
           animate="animate"
-          style={{ display: "flex", gap: 10 }}
+          style={{ display: "flex", gap: 10, alignItems: "center" }}
         >
           {experimentProjects.map((project) => (
             <motion.div key={project.slug} variants={cardEnterVariant}>
@@ -280,7 +280,7 @@ function ProjectGrid({
         variants={projectRowVariants}
         initial="initial"
         animate="animate"
-        style={{ display: "flex", gap: 10 }}
+        style={{ display: "flex", gap: 10, alignItems: "center" }}
       >
         {researchProjects.map((project) => (
           <motion.div key={project.slug} variants={cardEnterVariant}>
