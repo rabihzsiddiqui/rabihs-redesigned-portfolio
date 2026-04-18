@@ -11,7 +11,7 @@
 
 import { useState, cloneElement, isValidElement } from "react";
 import { useRouter } from "next/navigation";
-import { motion, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import type { Project } from "@/lib/data";
 import { useIsMobile } from "@/lib/useMediaQuery";
 
@@ -132,6 +132,8 @@ interface ProjectCardProps {
   project: Project;
   /** Physical card height in px. Values below 280 activate compact mode. Default: 190. */
   cardHeight?: number;
+  /** Desktop expanded height on hover. Defaults to cardHeight (no vertical grow). */
+  hoverHeight?: number;
   /** Optional badge label shown top-right (e.g. "WIP", "PROTOTYPE"). */
   badge?: string;
   /** Desktop rest width in px. Default: 150. */
@@ -140,7 +142,7 @@ interface ProjectCardProps {
   hoverWidth?: number;
 }
 
-export default function ProjectCard({ project, cardHeight = 190, badge, restWidth: deskRest = 150, hoverWidth: deskHover = 248 }: ProjectCardProps) {
+export default function ProjectCard({ project, cardHeight = 190, hoverHeight, badge, restWidth: deskRest = 150, hoverWidth: deskHover = 248 }: ProjectCardProps) {
   const compact = cardHeight < 280;
 
   const [hovered, setHovered] = useState(false);
@@ -149,8 +151,9 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
   const rgb = hexToRgb(project.color);
 
   const restWidth = isMobile ? "80vw" : deskRest;
-  const hoverWidth = isMobile ? "80vw" : deskHover;
-  const currentWidth = hovered && !isMobile ? hoverWidth : restWidth;
+  const expandWidth = isMobile ? "80vw" : deskHover;
+  const currentWidth = hovered && !isMobile ? expandWidth : restWidth;
+  const currentHeight = hovered && !isMobile && hoverHeight ? hoverHeight : cardHeight;
   const showExpanded = hovered && !isMobile;
 
   const iconSize = compact ? 36 : 48;
@@ -164,14 +167,14 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
       onMouseLeave={() => setHovered(false)}
       style={{
         width: currentWidth,
-        height: cardHeight,
+        height: currentHeight,
         borderRadius: 12,
         overflow: "hidden",
         cursor: "pointer",
         position: "relative",
         flexShrink: 0,
         scrollSnapAlign: isMobile ? "center" : undefined,
-        transition: "width 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",
+        transition: "width 0.4s cubic-bezier(0.25,0.46,0.45,0.94), height 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",
       }}
     >
       {/* Background fill */}
@@ -252,7 +255,7 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
           flexDirection: "column",
           alignItems: "center",
           padding: showExpanded
-            ? compact ? "14px 16px 12px" : "28px 20px 20px"
+            ? compact ? "14px 16px 18px" : "28px 20px 20px"
             : compact ? "18px 14px 14px" : "28px 16px 20px",
           textAlign: "center",
           transition: "padding 0.4s ease",
@@ -322,7 +325,7 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
           {project.category}
         </div>
 
-        {/* Description */}
+        {/* Description — mobile always shown, desktop only for non-compact cards */}
         {isMobile ? (
           <p
             style={{
@@ -331,38 +334,30 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
               color: "#7a7f8a",
               lineHeight: 1.6,
               margin: "12px 0 0 0",
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitLineClamp: 4,
-              WebkitBoxOrient: "vertical",
             }}
           >
-            {project.description}
+            {project.shortDescription}
           </p>
-        ) : (
-          <p
-            style={{
-              fontFamily: "var(--font-dm-sans)",
-              fontSize: compact ? 10.5 : 11.5,
-              color: "#9ca0ab",
-              lineHeight: compact ? 1.5 : 1.6,
-              margin: `${compact ? 8 : 14}px 0 0 0`,
-              opacity: showExpanded ? 1 : 0,
-              // maxHeight snaps (not animated) so text doesn't scroll into view.
-              // On enter: height appears instantly, then opacity fades in.
-              // On leave: opacity fades first, then height collapses after the fade.
-              maxHeight: showExpanded ? (compact ? 36 : 80) : 0,
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitLineClamp: compact ? 2 : 4,
-              WebkitBoxOrient: "vertical",
-              transition: showExpanded
-                ? "opacity 0.38s ease 0.1s"
-                : "opacity 0.18s ease, max-height 0s 0.22s",
-            }}
-          >
-            {project.description}
-          </p>
+        ) : !compact && (
+          <AnimatePresence>
+            {showExpanded && (
+              <motion.p
+                key="desc"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 0.22, delay: 0.38 } }}
+                exit={{ opacity: 0, transition: { duration: 0 } }}
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: 11,
+                  color: "#9ca0ab",
+                  lineHeight: 1.6,
+                  margin: "14px 0 0 0",
+                }}
+              >
+                {project.shortDescription}
+              </motion.p>
+            )}
+          </AnimatePresence>
         )}
 
         {/* Tags */}
@@ -379,7 +374,7 @@ export default function ProjectCard({ project, cardHeight = 190, badge, restWidt
           }}
         >
           {(showExpanded || isMobile) &&
-            project.tags.slice(0, isMobile ? 2 : compact ? 3 : 4).map((tag) => (
+            project.tags.slice(0, isMobile ? 2 : compact ? 2 : 4).map((tag) => (
               <span
                 key={tag}
                 style={{

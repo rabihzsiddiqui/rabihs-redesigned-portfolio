@@ -199,12 +199,12 @@ function ProjectGrid({
           variants={projectRowVariants}
           initial="initial"
           animate="animate"
-          style={{ display: "flex", gap: 10, alignItems: "flex-start" }}
+          style={{ display: "flex", gap: 10, alignItems: "center" }}
         >
           {/* Main 3 — indices 0, 1, 2 in the stagger */}
           {toolsProjects.slice(0, 3).map((project) => (
             <motion.div key={project.slug} variants={cardEnterVariant}>
-              <ProjectCard project={project} cardHeight={340} />
+              <ProjectCard project={project} cardHeight={340} hoverHeight={420} />
             </motion.div>
           ))}
 
@@ -256,6 +256,7 @@ function ProjectGrid({
               <ProjectCard
                 project={project}
                 cardHeight={320}
+                hoverHeight={400}
                 badge={BADGES[project.slug]}
               />
             </motion.div>
@@ -283,7 +284,7 @@ function ProjectGrid({
       >
         {researchProjects.map((project) => (
           <motion.div key={project.slug} variants={cardEnterVariant}>
-            <ProjectCard project={project} cardHeight={320} />
+            <ProjectCard project={project} cardHeight={320} hoverHeight={400} />
           </motion.div>
         ))}
       </motion.div>

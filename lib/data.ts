@@ -151,6 +151,7 @@ export interface Project {
   name: string;         // display name, preserving original casing
   nameUpper: string;    // all-caps version for the card UI
   category: string;
+  shortDescription: string; // one-line summary used in card previews
   description: string;
   year: string;
   tags: string[];
@@ -167,6 +168,7 @@ export const projects: Project[] = [
     name: "audoRa",
     nameUpper: "AUDORA",
     category: "AUDIO TOOL",
+    shortDescription: "Pulls audio from any video file directly in the browser, no uploads.",
     description:
       "Browser-based audio extractor. Pulls audio from video files right in the browser using ffmpeg.wasm, so nothing gets uploaded anywhere. Supports common formats like MP4, WebM, MOV, and MKV, with options for bitrate, channels, and trimming before export.",
     year: "2025",
@@ -183,6 +185,7 @@ export const projects: Project[] = [
     name: "compResso",
     nameUpper: "COMPRESSO",
     category: "VIDEO TOOL",
+    shortDescription: "Compresses video files in the browser with adjustable settings and local export.",
     description:
       "Browser-based video compressor. Compresses video files directly in the browser without sending them to a server. Lets users adjust compression settings, compare file size changes, and export a smaller file locally. Made to keep video compression quick, simple, and private.",
     year: "2025",
@@ -199,6 +202,7 @@ export const projects: Project[] = [
     name: "scReen",
     nameUpper: "SCREEN",
     category: "DISPLAY TOOL",
+    shortDescription: "Renders any two screens side by side at accurate physical scale for direct comparison.",
     description:
       "Browser-native display comparison tool that renders any two screens side by side at accurate physical scale. Choose from a preset library of phones, tablets, laptops, monitors, and TVs, or enter custom dimensions. Everything runs locally with no uploads and no tracking.",
     year: "2025",
@@ -215,6 +219,7 @@ export const projects: Project[] = [
     name: "pomodoRo",
     nameUpper: "POMODORO",
     category: "PRODUCTIVITY",
+    shortDescription: "A keyboard-driven Pomodoro timer with session tracking and browser notifications.",
     description:
       "Browser-native Pomodoro timer with configurable work and break cycles. Fully keyboard-driven with spacebar, skip, and reset controls. Includes a circular SVG countdown ring, session tracking via localStorage, optional audio chimes, browser notifications, and a dynamic favicon that updates with the timer state.",
     year: "2025",
@@ -231,6 +236,7 @@ export const projects: Project[] = [
     name: "scRibe",
     nameUpper: "SCRIBE",
     category: "WRITING TOOL",
+    shortDescription: "A distraction-free writing workspace with word count, reading time, and a built-in timer.",
     description:
       "A distraction-free writing workspace with write, preview, and read modes. Tracks word count, character count, reading time, and session progress in real time. Includes a built-in Pomodoro timer for focused writing sessions and a dark/light theme that persists across visits.",
     year: "2025",
@@ -247,6 +253,7 @@ export const projects: Project[] = [
     name: "spectRa",
     nameUpper: "SPECTRA",
     category: "ACCESSIBILITY",
+    shortDescription: "Shows how color pairings look under different types of color vision deficiency.",
     description:
       "Still a work in progress. A client-side color accessibility tool that goes beyond basic contrast checks by showing how color pairings appear under different types of color vision deficiency and suggesting better alternatives. Built by someone who is colorblind, for people who want to design more accessibly.",
     year: "2025",
@@ -263,6 +270,7 @@ export const projects: Project[] = [
     name: "nyra",
     nameUpper: "NYRA",
     category: "AI PROTOTYPE",
+    shortDescription: "A prototype AI companion interface built around four interaction states and WebGL visuals.",
     description:
       "A prototype interface for a personal AI companion and assistant. Built around four states: idle, listening, thinking, and speaking, with a minimal frosted-glass UI and WebGL-based visual effects through GLSL shaders. This is the starting point for a larger long-term assistant project.",
     year: "2025",
@@ -279,6 +287,7 @@ export const projects: Project[] = [
     name: "Restaurant Rating Analysis",
     nameUpper: "RESTAURANT ANALYSIS",
     category: "DATA SCIENCE",
+    shortDescription: "Explored whether restaurant ratings relate to geographic proximity using real review data.",
     description:
       "Looked at whether restaurant ratings relate to geographic proximity using a real review dataset. Built in Jupyter with Python, pandas, and data visualization to explore patterns and present the results clearly.",
     year: "2024",
@@ -296,6 +305,7 @@ export const projects: Project[] = [
     name: "V.I.S.A",
     nameUpper: "V.I.S.A",
     category: "UX CONCEPT",
+    shortDescription: "A concept assistive tool that helps visually impaired users navigate their surroundings.",
     description:
       "A concept for an assistive tool that helps visually impaired users navigate their surroundings with more confidence. The idea combines haptic feedback, spatial audio, and environmental awareness, with accessibility and usability kept at the center of the project.",
     year: "2024",
