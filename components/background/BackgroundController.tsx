@@ -11,6 +11,6 @@ import AnimatedBackground from "./AnimatedBackground";
 
 export default function BackgroundController() {
   const pathname = usePathname();
-  const blurred = pathname.startsWith("/projects");
+  const blurred = pathname.startsWith("/projects") || pathname.startsWith("/about");
   return <AnimatedBackground blurred={blurred} />;
 }
