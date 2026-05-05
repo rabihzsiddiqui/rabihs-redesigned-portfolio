@@ -245,7 +245,7 @@ export const projects: Project[] = [
     iconDescription:
       "A monitor outline (rounded rectangle, roughly 32x22 within the 48x48 viewBox, centered) with a small filled dot (~2px radius) positioned in the upper-right area of the screen interior. The dot represents the moving pixel that prevents OLED burn-in. A faint trail of 3 small dots with decreasing opacity (0.5, 0.3, 0.15) curves behind the main dot to suggest motion. A short vertical stand and horizontal base sit below the monitor outline.",
     liveUrl: "https://da-rk.vercel.app",
-    sourceUrl: null,
+    sourceUrl: "https://github.com/rabihzsiddiqui/daRk",
     slidesUrl: null,
   },
   {
