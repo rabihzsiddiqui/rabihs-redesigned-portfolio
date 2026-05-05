@@ -23,7 +23,7 @@ import BackButton from "@/components/layout/BackButton";
 
 // ── Project slug groups ────────────────────────────────────────────────────────
 
-const TOOLS_SLUGS       = ["audora", "compresso", "screen", "pomodoro", "scribe"];
+const TOOLS_SLUGS       = ["audora", "compresso", "screen", "dark", "pomodoro", "scribe"];
 const EXPERIMENTS_SLUGS = ["spectra", "nyra"];
 const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
@@ -181,7 +181,7 @@ function ProjectGrid({
   if (category === "tools") {
     // Stacked column dimensions:
     //   rest  120px  hover  200px  height  164px
-    // Main 3 cards: 340px tall (default 150/248 widths).
+    // Main 4 cards: 340px tall (default 150/248 widths).
     // Stack column is pre-sized to the hover width so layout never shifts.
     const STACK_HOVER_W = 200;
 
@@ -194,21 +194,21 @@ function ProjectGrid({
         exit="exit"
         style={{ display: "flex", justifyContent: "center" }}
       >
-        {/* Single horizontal row: 3 full-height cards + right-side stack */}
+        {/* Single horizontal row: 4 full-height cards + right-side stack */}
         <motion.div
           variants={projectRowVariants}
           initial="initial"
           animate="animate"
           style={{ display: "flex", gap: 10, alignItems: "center" }}
         >
-          {/* Main 3 — indices 0, 1, 2 in the stagger */}
-          {toolsProjects.slice(0, 3).map((project) => (
+          {/* Main 4 — indices 0, 1, 2, 3 in the stagger */}
+          {toolsProjects.slice(0, 4).map((project) => (
             <motion.div key={project.slug} variants={cardEnterVariant}>
               <ProjectCard project={project} cardHeight={340} hoverHeight={420} />
             </motion.div>
           ))}
 
-          {/* Stacked column — index 3 in the stagger, re-staggers its two children */}
+          {/* Stacked column — index 4 in the stagger, re-staggers its two children */}
           <motion.div
             variants={toolsStackColVariants}
             style={{
@@ -219,7 +219,7 @@ function ProjectGrid({
               flexShrink: 0,
             }}
           >
-            {toolsProjects.slice(3).map((project) => (
+            {toolsProjects.slice(4).map((project) => (
               <motion.div key={project.slug} variants={cardEnterVariant}>
                 <ProjectCard
                   project={project}

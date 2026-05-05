@@ -17,7 +17,7 @@ import ProjectCard from "./ProjectCard";
 import CompactCard from "./CompactCard";
 import { useIsMobile } from "@/lib/useMediaQuery";
 
-const TOOLS_SLUGS = ["audora", "compresso", "screen", "pomodoro", "scribe"];
+const TOOLS_SLUGS = ["audora", "compresso", "screen", "dark", "pomodoro", "scribe"];
 const EXPERIMENTS_SLUGS = ["spectra", "nyra"];
 const RESEARCH_SLUGS = ["restaurant-rating-analysis", "visa"];
 

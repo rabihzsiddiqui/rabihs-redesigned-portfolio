@@ -232,6 +232,23 @@ export const projects: Project[] = [
     slidesUrl: null,
   },
   {
+    slug: "dark",
+    name: "daRk",
+    nameUpper: "DARK",
+    category: "OLED TOOL",
+    shortDescription: "Fullscreen pure black canvas with a moving pixel that keeps OLED screens refreshing without turning off.",
+    description:
+      "Browser-based OLED protection tool. Prevents burn-in without turning the screen off by displaying a fullscreen pure black canvas with a tiny moving pixel that keeps the display refreshing. Useful for media playback, ambient setups, or anyone running an OLED monitor.",
+    year: "2026",
+    tags: ["Next.js", "TypeScript", "Canvas API", "OLED"],
+    color: "#6b7280",
+    iconDescription:
+      "A simple monitor outline (rounded rectangle) with a single small dot/circle positioned in the upper-third area, representing the moving pixel inside a black screen.",
+    liveUrl: "https://da-rk.vercel.app",
+    sourceUrl: null,
+    slidesUrl: null,
+  },
+  {
     slug: "scribe",
     name: "scRibe",
     nameUpper: "SCRIBE",
@@ -332,6 +349,7 @@ export const SLUG_TO_CATEGORY: Record<string, "tools" | "experiments" | "researc
   audora:                     "tools",
   compresso:                  "tools",
   screen:                     "tools",
+  dark:                       "tools",
   pomodoro:                   "tools",
   scribe:                     "tools",
   spectra:                    "experiments",
