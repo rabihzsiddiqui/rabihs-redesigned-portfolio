@@ -70,6 +70,22 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
       <path d="M20 11h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
+  dark: (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      {/* Monitor outline */}
+      <rect x="8" y="10" width="32" height="22" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      {/* Stand neck */}
+      <line x1="24" y1="32" x2="24" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Stand base */}
+      <line x1="17" y1="38" x2="31" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Motion trail — fading dots curving from lower-left to upper-right */}
+      <circle cx="22" cy="22" r="1" fill="currentColor" opacity="0.15" />
+      <circle cx="26" cy="20" r="1.2" fill="currentColor" opacity="0.3" />
+      <circle cx="30" cy="17" r="1.5" fill="currentColor" opacity="0.5" />
+      {/* Main moving pixel */}
+      <circle cx="34" cy="14" r="2" fill="currentColor" />
+    </svg>
+  ),
   scribe: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <path d="M12 8h18l8 8v28H12z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />

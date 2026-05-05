@@ -243,7 +243,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Canvas API", "OLED"],
     color: "#6b7280",
     iconDescription:
-      "A simple monitor outline (rounded rectangle) with a single small dot/circle positioned in the upper-third area, representing the moving pixel inside a black screen.",
+      "A monitor outline (rounded rectangle, roughly 32x22 within the 48x48 viewBox, centered) with a small filled dot (~2px radius) positioned in the upper-right area of the screen interior. The dot represents the moving pixel that prevents OLED burn-in. A faint trail of 3 small dots with decreasing opacity (0.5, 0.3, 0.15) curves behind the main dot to suggest motion. A short vertical stand and horizontal base sit below the monitor outline.",
     liveUrl: "https://da-rk.vercel.app",
     sourceUrl: null,
     slidesUrl: null,
