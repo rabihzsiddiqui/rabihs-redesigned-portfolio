@@ -104,9 +104,9 @@ export interface CategoryDef {
 }
 
 export const CATEGORY_DEFS: CategoryDef[] = [
-  { id: "tools",       name: "TOOLS",       subtitle: "Browser-based utilities", count: 6, color: "#00d4ff" },
-  { id: "experiments", name: "EXPERIMENTS", subtitle: "Work in progress",        count: 3, color: "#a78bfa" },
-  { id: "research",    name: "RESEARCH",    subtitle: "Academic & concept",       count: 2, color: "#fbbf24" },
+  { id: "tools",       name: "TOOLS",       subtitle: "Simple, browser-based utilities",    count: 6, color: "#00d4ff" },
+  { id: "experiments", name: "EXPERIMENTS", subtitle: "Prototypes in active development",    count: 3, color: "#a78bfa" },
+  { id: "research",    name: "RESEARCH",    subtitle: "Academic and conceptual design work", count: 2, color: "#fbbf24" },
 ];
 
 const ICONS: Record<CategoryId, React.ReactNode> = {
