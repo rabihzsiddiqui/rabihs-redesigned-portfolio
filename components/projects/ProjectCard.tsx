@@ -95,6 +95,22 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
       <path d="M18 32h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
+  nura: (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      {/* Row 0 */}
+      <rect x="8"  y="8"  width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="20" y="8"  width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="32" y="8"  width="8" height="8" rx="1.5" fill="currentColor" />
+      {/* Row 1 */}
+      <rect x="8"  y="20" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="20" y="20" width="8" height="8" rx="1.5" fill="currentColor" />
+      <rect x="32" y="20" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      {/* Row 2 */}
+      <rect x="8"  y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="20" y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="32" y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
   spectra: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <path d="M8 27c4.5-9 9-13 16-13s11.5 4 16 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

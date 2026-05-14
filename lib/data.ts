@@ -266,6 +266,23 @@ export const projects: Project[] = [
     slidesUrl: null,
   },
   {
+    slug: "nura",
+    name: "nuRa",
+    nameUpper: "NURA",
+    category: "SYMPTOM TRACKER",
+    shortDescription: "A gentle, three-tap symptom tracker that runs locally with no account or cloud required.",
+    description:
+      "A gentle symptom tracker PWA built for when your body is trying to tell you something. Three taps to log a symptom with severity and notes. Day and month views to spot patterns. Local-first with IndexedDB — no account, no cloud, no third parties. Built as a prototype with potential to become a full MVP.",
+    year: "2026",
+    tags: ["Next.js 16", "React 19", "TypeScript", "Dexie.js", "PWA"],
+    color: "#fb7185",
+    iconDescription:
+      "A 3x3 grid of small rounded squares (each ~8px), representing the symptom tile interface. Two squares (top-right and middle) are filled with currentColor at full opacity; the rest are outlined with stroke only. Centered within a 48x48 viewBox with ~4px gaps between squares.",
+    liveUrl: "https://nu-ra.vercel.app",
+    sourceUrl: "https://github.com/rabihzsiddiqui/nuRa",
+    slidesUrl: null,
+  },
+  {
     slug: "spectra",
     name: "spectRa",
     nameUpper: "SPECTRA",
@@ -352,6 +369,7 @@ export const SLUG_TO_CATEGORY: Record<string, "tools" | "experiments" | "researc
   dark:                       "tools",
   pomodoro:                   "tools",
   scribe:                     "tools",
+  nura:                       "experiments",
   spectra:                    "experiments",
   nyra:                       "experiments",
   "restaurant-rating-analysis": "research",
