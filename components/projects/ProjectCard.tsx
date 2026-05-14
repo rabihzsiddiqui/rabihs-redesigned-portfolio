@@ -97,18 +97,19 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
   ),
   nura: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      {/* Row 0 */}
-      <rect x="8"  y="8"  width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="20" y="8"  width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="32" y="8"  width="8" height="8" rx="1.5" fill="currentColor" />
-      {/* Row 1 */}
-      <rect x="8"  y="20" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="20" y="20" width="8" height="8" rx="1.5" fill="currentColor" />
-      <rect x="32" y="20" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      {/* Row 2 */}
-      <rect x="8"  y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="20" y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="32" y="32" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      {/* Heart outline */}
+      <path
+        d="M24 40C16 34 8 26 8 19C8 12 12 9 17 9C20 9 22 11 24 14C26 11 28 9 31 9C36 9 40 12 40 19C40 26 32 34 24 40Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      {/* Hour hand ~10 o'clock (~5px) */}
+      <line x1="24" y1="22" x2="19.7" y2="19.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Minute hand ~2 o'clock (~8px) */}
+      <line x1="24" y1="22" x2="30.9" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Center pivot */}
+      <circle cx="24" cy="22" r="1.5" fill="currentColor" />
     </svg>
   ),
   spectra: (

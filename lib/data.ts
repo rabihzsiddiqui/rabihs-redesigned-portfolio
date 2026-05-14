@@ -277,7 +277,7 @@ export const projects: Project[] = [
     tags: ["Next.js 16", "React 19", "TypeScript", "Dexie.js", "PWA"],
     color: "#fb7185",
     iconDescription:
-      "A 3x3 grid of small rounded squares (each ~8px), representing the symptom tile interface. Two squares (top-right and middle) are filled with currentColor at full opacity; the rest are outlined with stroke only. Centered within a 48x48 viewBox with ~4px gaps between squares.",
+      "A heart-shaped clock. The outer shape is a classic heart outline (two rounded bumps at the top meeting in a small dip, curving down to a point at the bottom), drawn with stroke='currentColor', strokeWidth='1.5', fill='none', and strokeLinejoin='round'. The heart should be roughly 32px tall, centered within the 48x48 viewBox. Inside the heart, place two clock hands meeting at the visual center of the heart shape (slightly above the geometric center to account for the heart's pointed bottom). The hour hand is shorter (~5px long) pointing roughly to the 10 o'clock position, and the minute hand is longer (~8px long) pointing roughly to the 2 o'clock position. Both hands use stroke='currentColor', strokeWidth='1.5', strokeLinecap='round'. At the meeting point of the hands, place a small filled dot (~1.5px radius) using fill='currentColor' to anchor the clock mechanism. Do not add hour markers, numbers, or a separate inner circle for the clock face. The heart shape itself serves as the clock face. Keep the whole composition simple, gentle, and balanced.",
     liveUrl: "https://nu-ra.vercel.app",
     sourceUrl: "https://github.com/rabihzsiddiqui/nuRa",
     slidesUrl: null,
