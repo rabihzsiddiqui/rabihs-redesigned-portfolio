@@ -170,6 +170,7 @@ function ProjectGrid({
             project={project}
             cardHeight={300}
             badge={BADGES[project.slug]}
+            highlight={HIGHLIGHT_SLUGS.has(project.slug)}
           />
         ))}
       </motion.div>
