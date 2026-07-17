@@ -169,13 +169,15 @@ interface ProjectCardProps {
   hoverHeight?: number;
   /** Optional badge label shown top-right (e.g. "WIP", "PROTOTYPE"). */
   badge?: string;
+  /** When true, renders a prominent amber "NEW" pill at top-left. */
+  highlight?: boolean;
   /** Desktop rest width in px. Default: 150. */
   restWidth?: number;
   /** Desktop hover (expanded) width in px. Default: 248. */
   hoverWidth?: number;
 }
 
-export default function ProjectCard({ project, cardHeight = 190, hoverHeight, badge, restWidth: deskRest = 150, hoverWidth: deskHover = 248 }: ProjectCardProps) {
+export default function ProjectCard({ project, cardHeight = 190, hoverHeight, badge, highlight, restWidth: deskRest = 150, hoverWidth: deskHover = 248 }: ProjectCardProps) {
   const compact = cardHeight < 280;
 
   const [hovered, setHovered] = useState(false);
@@ -258,6 +260,30 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
           }}
         >
           {badge}
+        </div>
+      )}
+
+      {/* NEW highlight — amber pill, top-left, more prominent than badge */}
+      {highlight && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 8,
+            left: 8,
+            zIndex: 10,
+            fontFamily: "var(--font-dm-sans)",
+            fontWeight: 700,
+            fontSize: 9,
+            letterSpacing: "0.12em",
+            color: "#000",
+            background: "#f59e0b",
+            borderRadius: 4,
+            padding: "3px 8px",
+            boxShadow: "0 0 12px rgba(245,158,11,0.7), 0 0 28px rgba(245,158,11,0.25)",
+          }}
+        >
+          NEW
         </div>
       )}
 

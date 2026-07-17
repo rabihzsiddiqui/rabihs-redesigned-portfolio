@@ -30,8 +30,10 @@ const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 const BADGES: Record<string, string> = {
   spectra: "WIP",
   nyra:    "PROTOTYPE",
-  nura:    "NEW",
+  nura:    "PROTOTYPE",
 };
+
+const HIGHLIGHT_SLUGS = new Set(["nura"]);
 
 // ── Animation variants ─────────────────────────────────────────────────────────
 
@@ -260,6 +262,7 @@ function ProjectGrid({
                 cardHeight={320}
                 hoverHeight={400}
                 badge={BADGES[project.slug]}
+                highlight={HIGHLIGHT_SLUGS.has(project.slug)}
               />
             </motion.div>
           ))}

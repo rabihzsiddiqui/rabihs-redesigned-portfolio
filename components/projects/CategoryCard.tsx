@@ -199,27 +199,50 @@ export default function CategoryCard({ category, onClick, isMobile = false }: Ca
         }}
       />
 
-      {/* Badge — top-right corner */}
+      {/* Badge — top-right corner. "NEW" uses a prominent amber style; others use the subtle tinted style. */}
       {category.badge && (
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: 10,
-            right: 10,
-            zIndex: 10,
-            fontFamily: "var(--font-dm-sans)",
-            fontSize: 8,
-            letterSpacing: "0.12em",
-            color: category.color,
-            background: `rgba(${rgb},0.1)`,
-            border: `1px solid rgba(${rgb},0.22)`,
-            borderRadius: 3,
-            padding: "2px 5px",
-          }}
-        >
-          {category.badge}
-        </div>
+        category.badge === "NEW" ? (
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              zIndex: 10,
+              fontFamily: "var(--font-dm-sans)",
+              fontWeight: 700,
+              fontSize: 9,
+              letterSpacing: "0.12em",
+              color: "#000",
+              background: "#f59e0b",
+              borderRadius: 4,
+              padding: "3px 8px",
+              boxShadow: "0 0 12px rgba(245,158,11,0.7), 0 0 28px rgba(245,158,11,0.25)",
+            }}
+          >
+            NEW
+          </div>
+        ) : (
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              zIndex: 10,
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 8,
+              letterSpacing: "0.12em",
+              color: category.color,
+              background: `rgba(${rgb},0.1)`,
+              border: `1px solid rgba(${rgb},0.22)`,
+              borderRadius: 3,
+              padding: "2px 5px",
+            }}
+          >
+            {category.badge}
+          </div>
+        )
       )}
 
       {/* Bottom accent glow bar */}
