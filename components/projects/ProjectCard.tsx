@@ -263,14 +263,14 @@ export default function ProjectCard({ project, cardHeight = 190, hoverHeight, ba
         </div>
       )}
 
-      {/* NEW highlight — amber pill, top-left, more prominent than badge */}
+      {/* NEW highlight — amber pill, top-right */}
       {highlight && (
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
             top: 8,
-            left: 8,
+            right: 8,
             zIndex: 10,
             fontFamily: "var(--font-dm-sans)",
             fontWeight: 700,

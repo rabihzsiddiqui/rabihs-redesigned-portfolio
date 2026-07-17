@@ -27,11 +27,7 @@ const TOOLS_SLUGS       = ["audora", "compresso", "screen", "dark", "pomodoro", 
 const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura"];
 const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
-const BADGES: Record<string, string> = {
-  spectra: "WIP",
-  nyra:    "PROTOTYPE",
-  nura:    "PROTOTYPE",
-};
+const BADGES: Record<string, string> = {};
 
 const HIGHLIGHT_SLUGS = new Set(["nura"]);
 
