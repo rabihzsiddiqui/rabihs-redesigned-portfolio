@@ -101,11 +101,12 @@ export interface CategoryDef {
   subtitle: string;
   count: number;
   color: string;
+  badge?: string;
 }
 
 export const CATEGORY_DEFS: CategoryDef[] = [
   { id: "tools",       name: "TOOLS",       subtitle: "Simple, browser-based utilities",    count: 6, color: "#00d4ff" },
-  { id: "experiments", name: "EXPERIMENTS", subtitle: "Prototypes in active development",    count: 3, color: "#a78bfa" },
+  { id: "experiments", name: "EXPERIMENTS", subtitle: "Prototypes in active development",    count: 3, color: "#a78bfa", badge: "NEW" },
   { id: "research",    name: "RESEARCH",    subtitle: "Academic and conceptual design work", count: 2, color: "#fbbf24" },
 ];
 
@@ -197,6 +198,29 @@ export default function CategoryCard({ category, onClick, isMobile = false }: Ca
           pointerEvents: "none",
         }}
       />
+
+      {/* Badge — top-right corner */}
+      {category.badge && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+            zIndex: 10,
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 8,
+            letterSpacing: "0.12em",
+            color: category.color,
+            background: `rgba(${rgb},0.1)`,
+            border: `1px solid rgba(${rgb},0.22)`,
+            borderRadius: 3,
+            padding: "2px 5px",
+          }}
+        >
+          {category.badge}
+        </div>
+      )}
 
       {/* Bottom accent glow bar */}
       {hovered && !isMobile && (

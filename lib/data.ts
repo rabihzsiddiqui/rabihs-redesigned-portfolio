@@ -272,7 +272,7 @@ export const projects: Project[] = [
     category: "SYMPTOM TRACKER",
     shortDescription: "A gentle, three-tap symptom tracker that runs locally with no account or cloud required.",
     description:
-      "A gentle symptom tracker PWA built for when your body is trying to tell you something. Three taps to log a symptom with severity and notes. Day and month views to spot patterns. Local-first with IndexedDB — no account, no cloud, no third parties. Built as a prototype with potential to become a full MVP.",
+      "A gentle symptom tracker PWA built for when your body is trying to tell you something. Three taps to log a symptom with severity and notes. Day and month views to spot patterns. Local-first with IndexedDB, no account, no cloud, no third parties. Built as a prototype with potential to become a full MVP.",
     year: "2026",
     tags: ["Next.js 16", "React 19", "TypeScript", "Dexie.js", "PWA"],
     color: "#fb7185",

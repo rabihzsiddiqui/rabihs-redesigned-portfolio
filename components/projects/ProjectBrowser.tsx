@@ -30,7 +30,7 @@ const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 const BADGES: Record<string, string> = {
   spectra: "WIP",
   nyra:    "PROTOTYPE",
-  nura:    "PROTOTYPE",
+  nura:    "NEW",
 };
 
 // ── Animation variants ─────────────────────────────────────────────────────────
