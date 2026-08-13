@@ -317,6 +317,23 @@ export const projects: Project[] = [
     slidesUrl: null,
   },
   {
+    slug: "sword-runner",
+    name: "swoRd-Runner",
+    nameUpper: "SWORD RUNNER",
+    category: "ARCADE GAME",
+    shortDescription: "An installable PWA endless runner: jump armored obstacles, slash the soft ones, upgrade your blade.",
+    description:
+      "A web-based, installable endless runner built entirely in vanilla HTML5 Canvas, no build step, no dependencies. Jump the armored obstacles, cut the soft ones, build a multiplier, and slash gold lanterns mid-air to upgrade your blade. Three selectable characters, each with their own scene, music track, and sword progression line. Fully playable with touch controls on mobile, with keyboard support on desktop, and installs as a PWA with offline support via a service worker.",
+    year: "2026",
+    tags: ["HTML5 Canvas", "JavaScript", "PWA", "Service Worker"],
+    color: "#94a3b8",
+    iconDescription:
+      "A minimal sword icon: a diagonal blade line running from upper-right to lower-left, a short perpendicular crossguard near the base of the blade, a short grip continuing the same diagonal past the guard, and a small filled pommel dot at the end of the grip. Two or three small faded dots trail off the blade tip in the opposite direction to suggest a slash motion. Monoline, stroke='currentColor', strokeWidth='1.5', strokeLinecap='round', no fill except the pommel and motion dots.",
+    liveUrl: "https://sword-runner-demo.vercel.app",
+    sourceUrl: "https://github.com/rabihzsiddiqui/swoRd-Runner",
+    slidesUrl: null,
+  },
+  {
     slug: "restaurant-rating-analysis",
     name: "Restaurant Rating Analysis",
     nameUpper: "RESTAURANT ANALYSIS",
