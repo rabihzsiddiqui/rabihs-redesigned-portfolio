@@ -22,6 +22,7 @@ function ProfileCorner() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const links = [
+    { label: "Career Profile", href: "/about" },
     { label: "GitHub", href: identity.github },
     { label: "LinkedIn", href: identity.linkedin },
     { label: "Resume", href: "/Rabih_Siddiqui_Resume.pdf" },
@@ -225,7 +226,12 @@ function ProfileCorner() {
           style={dropdownStyle}
         >
           {links.map((link) => (
-            <ProfileLink key={link.label} href={link.href} label={link.label} />
+            <ProfileLink
+              key={link.label}
+              href={link.href}
+              label={link.label}
+              onNavigate={() => setOpen(false)}
+            />
           ))}
 
           <div
@@ -265,31 +271,62 @@ function ProfileCorner() {
   );
 }
 
-function ProfileLink({ href, label }: { href: string; label: string }) {
+function ProfileLink({
+  href,
+  label,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  onNavigate: () => void;
+}) {
   const isExternal = href.startsWith("http") || href.endsWith(".pdf");
+  const style: React.CSSProperties = {
+    display: "block",
+    padding: "6px 0",
+    fontFamily: "var(--font-dm-sans)",
+    fontSize: 11,
+    color: "#7a7f8a",
+    textDecoration: "none",
+    textAlign: "center",
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    transition: "color 0.2s ease",
+  };
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = "#00d4ff";
+  };
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = "#7a7f8a";
+  };
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        role="menuitem"
+        style={style}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {label}
+      </a>
+    );
+  }
+
   return (
-    <a
+    <Link
       href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
       role="menuitem"
-      style={{
-        display: "block",
-        padding: "6px 0",
-        fontFamily: "var(--font-dm-sans)",
-        fontSize: 11,
-        color: "#7a7f8a",
-        textDecoration: "none",
-        textAlign: "center",
-        textTransform: "uppercase",
-        letterSpacing: "0.1em",
-        transition: "color 0.2s ease",
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = "#00d4ff"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = "#7a7f8a"; }}
+      style={style}
+      onClick={onNavigate}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {label}
-    </a>
+    </Link>
   );
 }
 
