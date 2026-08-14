@@ -29,7 +29,7 @@ const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
 const BADGES: Record<string, string> = {};
 
-const HIGHLIGHT_SLUGS = new Set(["nura"]);
+const HIGHLIGHT_SLUGS = new Set(["nura", "sword-runner"]);
 
 // ── Animation variants ─────────────────────────────────────────────────────────
 
