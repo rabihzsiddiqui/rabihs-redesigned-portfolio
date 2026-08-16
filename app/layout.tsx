@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Rajdhani, DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -6,6 +6,7 @@ import BackgroundController from "@/components/background/BackgroundController";
 import Header from "@/components/layout/Header";
 import StatusBar from "@/components/layout/StatusBar";
 import MotionProvider from "@/components/layout/MotionProvider";
+import ServiceWorkerRegister from "@/components/pwa/ServiceWorkerRegister";
 
 const rajdhani = Rajdhani({
   variable: "--font-rajdhani",
@@ -52,6 +53,15 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Rabih Siddiqui",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#09090b",
 };
 
 export default function RootLayout({
@@ -66,6 +76,8 @@ export default function RootLayout({
     >
       <body className="h-full overflow-hidden antialiased">
         <MotionProvider>
+          <ServiceWorkerRegister />
+
           {/* Skip-to-content: first tab stop, jumps over persistent chrome */}
           <a href="#main-content" className="skip-to-content">
             SKIP TO CONTENT
