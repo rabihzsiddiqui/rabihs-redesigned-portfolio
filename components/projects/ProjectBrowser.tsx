@@ -24,12 +24,12 @@ import BackButton from "@/components/layout/BackButton";
 // ── Project slug groups ────────────────────────────────────────────────────────
 
 const TOOLS_SLUGS       = ["audora", "compresso", "screen", "dark", "pomodoro", "scribe"];
-const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura", "sword-runner"];
+const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura", "sword-runner", "tactical-rpg"];
 const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
 const BADGES: Record<string, string> = {};
 
-const HIGHLIGHT_SLUGS = new Set(["nura", "sword-runner"]);
+const HIGHLIGHT_SLUGS = new Set(["nura", "sword-runner", "tactical-rpg"]);
 
 // ── Animation variants ─────────────────────────────────────────────────────────
 

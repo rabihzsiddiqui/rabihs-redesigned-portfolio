@@ -323,7 +323,7 @@ export const projects: Project[] = [
     category: "ARCADE GAME",
     shortDescription: "An installable PWA endless runner: jump armored obstacles, slash the soft ones, upgrade your blade.",
     description:
-      "A web-based, installable endless runner built entirely in vanilla HTML5 Canvas, no build step, no dependencies. Jump the armored obstacles, cut the soft ones, build a multiplier, and slash gold lanterns mid-air to upgrade your blade. Three selectable characters, each with their own scene, music track, and sword progression line. Fully playable with touch controls on mobile, with keyboard support on desktop, and installs as a PWA with offline support via a service worker.",
+      "A web-based, installable endless runner built entirely in vanilla HTML5 Canvas, no build step, no dependencies. Jump the armored obstacles, cut down the enemies, build a score multiplier, and slash power ups in mid-air to upgrade your blade. Three selectable characters, each with their own scene, music track, and sword progression line. Fully playable with touch controls on mobile, with keyboard support on desktop, and installs as a PWA with offline support via a service worker.",
     year: "2026",
     tags: ["HTML5 Canvas", "JavaScript", "PWA", "Service Worker"],
     color: "#94a3b8",
@@ -331,6 +331,23 @@ export const projects: Project[] = [
       "A minimal sword icon: a diagonal blade line running from upper-right to lower-left, a short perpendicular crossguard near the base of the blade, a short grip continuing the same diagonal past the guard, and a small filled pommel dot at the end of the grip. Two or three small faded dots trail off the blade tip in the opposite direction to suggest a slash motion. Monoline, stroke='currentColor', strokeWidth='1.5', strokeLinecap='round', no fill except the pommel and motion dots.",
     liveUrl: "https://sword-runner-demo.vercel.app",
     sourceUrl: "https://github.com/rabihzsiddiqui/swoRd-Runner",
+    slidesUrl: null,
+  },
+  {
+    slug: "tactical-rpg",
+    name: "tactical-RPG",
+    nameUpper: "TACTICAL RPG",
+    category: "TURN-BASED STRATEGY",
+    shortDescription: "A Fire Emblem-style tactical RPG with grid combat, a weapon triangle, and stat growth.",
+    description:
+      "A browser-based tactical RPG built in the spirit of Fire Emblem, complete with the classic sword, axe, and lance weapon triangle. Command a roster of named units, Kaelen the Lord, Bram the Knight, Doran the Fighter, and more, across the Ashfen Pass map using pathfinding-based movement ranges and hit and critical damage calculations. Enemy turns run on a lightweight AI, and units grow stats on level up just like the games it draws from. Rendered with Three.js and built as its own installable PWA.",
+    year: "2026",
+    tags: ["React", "Three.js", "Vite", "Tailwind CSS", "PWA"],
+    color: "#b91c1c",
+    iconDescription:
+      "Three small filled circles arranged in an equilateral triangle, representing the sword, axe, and lance weapon triangle, connected by three gently curved lines that each bow toward the center to suggest a rotating, cyclic advantage loop. Monoline, stroke='currentColor', strokeWidth='1.5', strokeLinecap='round', nodes filled with currentColor.",
+    liveUrl: "https://tactical-rpg-rust.vercel.app/",
+    sourceUrl: "https://github.com/rabihzsiddiqui/tactical-RPG",
     slidesUrl: null,
   },
   {
@@ -389,6 +406,8 @@ export const SLUG_TO_CATEGORY: Record<string, "tools" | "experiments" | "researc
   nura:                       "experiments",
   spectra:                    "experiments",
   nyra:                       "experiments",
+  "sword-runner":             "experiments",
+  "tactical-rpg":             "experiments",
   "restaurant-rating-analysis": "research",
   visa:                       "research",
 };

@@ -106,7 +106,7 @@ export interface CategoryDef {
 
 export const CATEGORY_DEFS: CategoryDef[] = [
   { id: "tools",       name: "TOOLS",       subtitle: "Simple, browser-based utilities",    count: 6, color: "#00d4ff" },
-  { id: "experiments", name: "EXPERIMENTS", subtitle: "Prototypes in active development",    count: 4, color: "#a78bfa", badge: "NEW" },
+  { id: "experiments", name: "EXPERIMENTS", subtitle: "Prototypes in active development",    count: 5, color: "#a78bfa", badge: "NEW" },
   { id: "research",    name: "RESEARCH",    subtitle: "Academic and conceptual design work", count: 2, color: "#fbbf24" },
 ];
 

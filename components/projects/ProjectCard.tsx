@@ -150,6 +150,16 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
       <circle cx="40.5" cy="2.5" r="0.8" fill="currentColor" opacity="0.4" />
     </svg>
   ),
+  "tactical-rpg": (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <path d="M24 12Q28.2 23.6 36.1 33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M36.1 33Q24 30.9 11.9 33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M11.9 33Q19.8 23.6 24 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="24" cy="12" r="2.5" fill="currentColor" />
+      <circle cx="36.1" cy="33" r="2.5" fill="currentColor" />
+      <circle cx="11.9" cy="33" r="2.5" fill="currentColor" />
+    </svg>
+  ),
   visa: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <circle cx="26" cy="24" r="10" stroke="currentColor" strokeWidth="1.5" />
