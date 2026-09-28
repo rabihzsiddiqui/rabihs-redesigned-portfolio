@@ -24,7 +24,7 @@ import BackButton from "@/components/layout/BackButton";
 // ── Project slug groups ────────────────────────────────────────────────────────
 
 const TOOLS_SLUGS       = ["audora", "compresso", "screen", "dark", "pomodoro", "scribe"];
-const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura", "tactical-rpg"];
+const EXPERIMENTS_SLUGS = ["nura", "tactical-rpg", "spectra", "nyra"];
 const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
 const BADGES: Record<string, string> = {};
