@@ -24,12 +24,12 @@ import BackButton from "@/components/layout/BackButton";
 // ── Project slug groups ────────────────────────────────────────────────────────
 
 const TOOLS_SLUGS       = ["audora", "compresso", "screen", "dark", "pomodoro", "scribe"];
-const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura", "tactical-rpg", "sword-runner"];
+const EXPERIMENTS_SLUGS = ["spectra", "nyra", "nura", "tactical-rpg"];
 const RESEARCH_SLUGS    = ["restaurant-rating-analysis", "visa"];
 
 const BADGES: Record<string, string> = {};
 
-const HIGHLIGHT_SLUGS = new Set(["nura", "sword-runner", "tactical-rpg"]);
+const HIGHLIGHT_SLUGS = new Set(["nura", "tactical-rpg"]);
 
 // ── Animation variants ─────────────────────────────────────────────────────────
 
@@ -75,10 +75,10 @@ const projectRowVariants: Variants = {
   animate: { transition: { staggerChildren: 0.07, delayChildren: 0.08 } },
 };
 
-// Transparent stagger pass-through for the TOOLS and EXPERIMENTS stacked columns.
-// The column itself has no visual animation. It just re-staggers its children
-// after the parent row counts it as the last index.
-const stackColVariants: Variants = {
+// Transparent stagger pass-through for the TOOLS stacked column.
+// The column itself has no visual animation — it just re-staggers its children
+// after the parent row counts it as index 3 (delay ≈ 0.29s).
+const toolsStackColVariants: Variants = {
   initial: {},
   animate: { transition: { staggerChildren: 0.07 } },
 };
@@ -210,7 +210,7 @@ function ProjectGrid({
 
           {/* Stacked column — index 4 in the stagger, re-staggers its two children */}
           <motion.div
-            variants={stackColVariants}
+            variants={toolsStackColVariants}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -237,10 +237,6 @@ function ProjectGrid({
   }
 
   if (category === "experiments") {
-    // Same layout as TOOLS: main cards in a row, games stacked on the right.
-    // Stack cards are 155px each so the pair (plus 10px gap) matches the 320px main cards.
-    const STACK_HOVER_W = 200;
-
     return (
       <motion.div
         key="level2-experiments"
@@ -256,8 +252,7 @@ function ProjectGrid({
           animate="animate"
           style={{ display: "flex", gap: 10, alignItems: "center" }}
         >
-          {/* Main 3: indices 0, 1, 2 in the stagger */}
-          {experimentProjects.slice(0, 3).map((project) => (
+          {experimentProjects.map((project) => (
             <motion.div key={project.slug} variants={cardEnterVariant}>
               <ProjectCard
                 project={project}
@@ -268,32 +263,6 @@ function ProjectGrid({
               />
             </motion.div>
           ))}
-
-          {/* Stacked column (games): index 3 in the stagger, re-staggers its two children */}
-          <motion.div
-            variants={stackColVariants}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 10,
-              width: STACK_HOVER_W,
-              flexShrink: 0,
-            }}
-          >
-            {experimentProjects.slice(3).map((project) => (
-              <motion.div key={project.slug} variants={cardEnterVariant}>
-                <ProjectCard
-                  project={project}
-                  cardHeight={155}
-                  hoverHeight={230}
-                  restWidth={STACK_HOVER_W}
-                  hoverWidth={STACK_HOVER_W}
-                  badge={BADGES[project.slug]}
-                  highlight={HIGHLIGHT_SLUGS.has(project.slug)}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
       </motion.div>
     );

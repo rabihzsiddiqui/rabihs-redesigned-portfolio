@@ -140,16 +140,6 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
       <path d="M20 10v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
     </svg>
   ),
-  "sword-runner": (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <path d="M34 8L14 28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M10.5 24.5L17.5 31.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M14 28L9 33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="9" cy="33" r="1.5" fill="currentColor" />
-      <circle cx="37" cy="5" r="1" fill="currentColor" opacity="0.25" />
-      <circle cx="40.5" cy="2.5" r="0.8" fill="currentColor" opacity="0.4" />
-    </svg>
-  ),
   "tactical-rpg": (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <path d="M24 12Q28.2 23.6 36.1 33" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
