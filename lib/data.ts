@@ -334,6 +334,23 @@ export const projects: Project[] = [
     slidesUrl: null,
   },
   {
+    slug: "kira",
+    name: "kiRa",
+    nameUpper: "KIRA",
+    category: "ACTION COMBAT",
+    shortDescription: "A Zelda-style katana combat engine demo with lock-on, perfect dodges, and slow motion.",
+    description:
+      "A browser-based combat engine for a third-person action game, built around a katana. The moveset takes after Twilight Princess, with Z-targeting, contextual evades, directional slashes, and a spin attack. On top of that sits a Stellar Blade style layer of perfect dodges, perfect blocks, counters, and slow motion. The gameplay core is plain TypeScript with no engine dependencies, so rendering, physics, and audio plug in through small interfaces. This demo runs it in Three.js against a training dummy.",
+    year: "2026",
+    tags: ["React", "Three.js", "Vite", "Tailwind CSS", "PWA"],
+    color: "#2dd4bf",
+    iconDescription:
+      "A minimal katana icon: a gently curved blade running from upper-right to lower-left, a small round guard at the base of the blade, and a short thicker grip past the guard. A faint arc above the blade suggests a slash. Monoline, stroke='currentColor', strokeWidth='1.5', strokeLinecap='round', no fill.",
+    liveUrl: "https://ki-ra-two.vercel.app",
+    sourceUrl: "https://github.com/rabihzsiddiqui/kiRa",
+    slidesUrl: null,
+  },
+  {
     slug: "restaurant-rating-analysis",
     name: "Restaurant Rating Analysis",
     nameUpper: "RESTAURANT ANALYSIS",
@@ -390,6 +407,7 @@ export const SLUG_TO_CATEGORY: Record<string, "tools" | "experiments" | "researc
   spectra:                    "experiments",
   nyra:                       "experiments",
   "tactical-rpg":             "experiments",
+  kira:                       "experiments",
   "restaurant-rating-analysis": "research",
   visa:                       "research",
 };

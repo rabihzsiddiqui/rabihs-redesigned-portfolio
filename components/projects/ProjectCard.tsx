@@ -150,6 +150,14 @@ export const PROJECT_ICONS: Record<string, React.ReactNode> = {
       <circle cx="11.9" cy="33" r="2.5" fill="currentColor" />
     </svg>
   ),
+  kira: (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <path d="M39 7Q31 19 18 29" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="16" cy="31" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M14 33L9 38" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M9 17Q20 7 33 6" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.35" />
+    </svg>
+  ),
   visa: (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
       <circle cx="26" cy="24" r="10" stroke="currentColor" strokeWidth="1.5" />
